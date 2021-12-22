@@ -1,5 +1,5 @@
 # gradle-project-template
-A project template(boilerplate) for me to use.  
+A project template(boilerplate) for me to use. Included most best-practices to me.  
 Configured with Kotlin and Android(which is quite heavy; excluded by default but can be enabled by uncommenting some lines).
 
 
