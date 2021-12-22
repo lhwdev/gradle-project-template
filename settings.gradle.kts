@@ -14,9 +14,23 @@ pluginManagement.resolutionStrategy.eachPlugin {
 	}
 }
 
+fun includeAll(filePath: String, path: String, vararg items: String) {
+	for(item in items) {
+		val realPath = "$filePath/$item"
+		val projectPath = "$path:$item"
+		include(projectPath)
+		
+		project(projectPath).projectDir = file(realPath)
+	}
+}
+
 
 /// Projects
 includeBuild("includeBuild")
 
-include(":module")
+includeAll(
+	filePath = "modules",
+	path = "",
+	"core"
+)
 
