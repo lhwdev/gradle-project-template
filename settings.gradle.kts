@@ -4,6 +4,10 @@
 // Also see Gradle Version Catalog(https://docs.gradle.org/7.1.1/userguide/platforms.html#sub:central-declaration-of-dependencies).
 enableFeaturePreview("VERSION_CATALOGS")
 
+// Type-safe Project Dependency Accessor
+// https://docs.gradle.org/7.4/userguide/declaring_dependencies.html#sec:type-safe-project-accessors
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
 
 pluginManagement.resolutionStrategy.eachPlugin {
 	val id = requested.id.id
