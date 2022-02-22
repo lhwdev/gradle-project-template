@@ -8,3 +8,8 @@ Configured with Kotlin and Android(which is quite heavy; excluded by default but
 - [`includeBuild`](includeBuild): some wrappers lie here(see [utils.kt](includeBuild/src/main/kotlin/com/lhwdev/build/utils.kt))
 - [`core`](modules/core): example module with Kotlin JVM.  
   When renaming / duplicating this module, add argument in `includeAll()` in [settings.gradle.kts](settings.gradle.kts).
+
+
+## License
+Virtual permissive license *_*
+You can do just anything with this template repository.
