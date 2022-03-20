@@ -3,12 +3,19 @@
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 
-pluginManagement.resolutionStrategy.eachPlugin {
-	val id = requested.id.id
+pluginManagement {
+	repositories {
+		gradlePluginPortal()
+		google()
+	}
 	
-	// Android
-	if(id.startsWith("com.android")) {
-		useModule("com.android.tools.build:gradle:7.1.2")
+	resolutionStrategy.eachPlugin {
+		val id = requested.id.id
+		
+		// Android
+		if(id.startsWith("com.android")) {
+			useModule("com.android.tools.build:gradle:7.1.2")
+		}
 	}
 }
 
