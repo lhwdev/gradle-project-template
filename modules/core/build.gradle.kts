@@ -6,7 +6,9 @@ plugins {
 
 commonConfig {
 	kotlin {
-		
+		dependencies {
+			
+		}
 	}
 }
 
