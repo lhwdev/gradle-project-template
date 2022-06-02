@@ -11,5 +11,5 @@ Configured with Kotlin and Android(which is quite heavy; excluded by default but
 
 
 ## License
-Virtual permissive license *_*
-You can do just anything with this template repository.
+Virtual permissive license `*_*`  
+You can do just anything with this template repository.  
