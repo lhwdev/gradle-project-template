@@ -1,6 +1,7 @@
 // Android dependencies and toolchains are large.
-// If you need android in your project, rename this file to .kt and uncomment
-// `compileOnly("com.android.tools.build:gradle:...")` from /includeBuild/build.gradle.kts.
+// If you need android in your project, rename this file to .kt and do following things:
+// - `compileOnly("com.android.tools.build:gradle:...")` from /includeBuild/build.gradle.kts.
+// - Uncomment `// is KotlinAndroidProjectExtension -> KotlinJvmScope::class.java` from CommonConfig.kt.
 package com.lhwdev.build
 
 import com.android.build.gradle.BaseExtension
@@ -34,6 +35,10 @@ fun KotlinMultiplatformScope.android(
 
 
 // mpp only
+
+open class KotlinAndroidScope(commonConfig: CommonConfig, final override val kotlin: KotlinAndroidProjectExtension) :
+	KotlinJvmKindScope(commonConfig, kotlin)
+
 class KotlinAndroidItem(
 	val target: KotlinAndroidTarget,
 	sourceSet: KotlinTargetSourceSet

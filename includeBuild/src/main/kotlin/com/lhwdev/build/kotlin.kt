@@ -6,6 +6,7 @@ import org.gradle.kotlin.dsl.invoke
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinProjectExtension
+import org.jetbrains.kotlin.gradle.dsl.KotlinSingleTargetExtension
 import org.jetbrains.kotlin.gradle.plugin.KotlinDependencyHandler
 import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 import org.jetbrains.kotlin.gradle.plugin.KotlinTarget
@@ -90,8 +91,11 @@ abstract class KotlinPlatformScope(commonConfig: CommonConfig) : KotlinScope(com
 	}
 }
 
-open class KotlinJvmScope(commonConfig: CommonConfig, final override val kotlin: KotlinJvmProjectExtension) :
+abstract class KotlinJvmKindScope(commonConfig: CommonConfig, kotlin: KotlinSingleTargetExtension) :
 	KotlinPlatformScope(commonConfig) {
+	
+	abstract override val kotlin: KotlinSingleTargetExtension
+	
 	val jvm: KotlinJvmItem = KotlinJvmItem(
 		target = kotlin.target,
 		sourceSet = KotlinTargetSourceSet(kotlin.sourceSets, name = null)
@@ -110,6 +114,9 @@ open class KotlinJvmScope(commonConfig: CommonConfig, final override val kotlin:
 		}
 	}
 }
+
+open class KotlinJvmScope(commonConfig: CommonConfig, final override val kotlin: KotlinJvmProjectExtension) :
+	KotlinJvmKindScope(commonConfig, kotlin)
 
 
 class KotlinTargetSourceSet(val main: KotlinSourceSet, val test: KotlinSourceSet?) {

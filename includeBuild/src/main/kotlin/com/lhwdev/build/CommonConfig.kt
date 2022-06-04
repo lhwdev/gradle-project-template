@@ -21,6 +21,7 @@ open class CommonConfig @Inject constructor(internal val project: Project) {
 			null -> null
 			is KotlinMultiplatformExtension -> KotlinMultiplatformScope::class.java
 			is KotlinJvmProjectExtension -> KotlinJvmScope::class.java
+			// is KotlinAndroidProjectExtension -> KotlinJvmScope::class.java
 			else -> error("not supported: $kotlin")
 		}?.let {
 			val scope = extensions.create("kotlin", it, this, kotlin)
