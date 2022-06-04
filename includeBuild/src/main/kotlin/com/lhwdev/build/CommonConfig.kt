@@ -27,7 +27,7 @@ open class CommonConfig @Inject constructor(internal val project: Project) {
 			scope.setup()
 		}
 		
-		initializeAndroid(extensions, project)
+		// initializeAndroid(extensions, project)
 	}
 }
 
