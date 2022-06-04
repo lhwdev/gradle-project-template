@@ -68,6 +68,14 @@ open class KotlinMultiplatformScope(commonConfig: CommonConfig, override val kot
 		
 		return item
 	}
+	
+	fun dependencies(block: KotlinDependencyHandler.() -> Unit) {
+		common.dependencies(block)
+	}
+	
+	fun testDependencies(block: KotlinDependencyHandler.() -> Unit) {
+		common.testDependencies(block)
+	}
 }
 
 abstract class KotlinPlatformScope(commonConfig: CommonConfig) : KotlinScope(commonConfig) {
