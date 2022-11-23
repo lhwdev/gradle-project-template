@@ -1,9 +1,10 @@
 # Versions for the whole project.
 
 [versions]
-kotlin = "1.6.10"
-coroutine = "1.6.0"
-serialization = "1.3.2"
+kotlin = "1.7.20"
+coroutine = "1.6.4"
+serialization = "1.4.1"
+androidGradle = "?.?.?" # added from settings.gradle.kts
 
 
 [plugins]

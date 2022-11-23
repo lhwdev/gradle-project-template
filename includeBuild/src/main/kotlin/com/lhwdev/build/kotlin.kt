@@ -1,3 +1,5 @@
+@file:Suppress("unused", "MemberVisibilityCanBePrivate")
+
 package com.lhwdev.build
 
 import org.gradle.api.NamedDomainObjectContainer
@@ -10,6 +12,7 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinSingleTargetExtension
 import org.jetbrains.kotlin.gradle.plugin.KotlinDependencyHandler
 import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 import org.jetbrains.kotlin.gradle.plugin.KotlinTarget
+import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinWithJavaTarget
 
 
 abstract class KotlinScope(internal val commonConfig: CommonConfig) {
@@ -91,10 +94,13 @@ abstract class KotlinPlatformScope(commonConfig: CommonConfig) : KotlinScope(com
 	}
 }
 
-abstract class KotlinJvmKindScope(commonConfig: CommonConfig, kotlin: KotlinSingleTargetExtension) :
+abstract class KotlinJvmKindScope<Target : KotlinTarget>(
+	commonConfig: CommonConfig,
+	kotlin: KotlinSingleTargetExtension<Target>
+) :
 	KotlinPlatformScope(commonConfig) {
 	
-	abstract override val kotlin: KotlinSingleTargetExtension
+	abstract override val kotlin: KotlinSingleTargetExtension<Target>
 	
 	val jvm: KotlinJvmItem = KotlinJvmItem(
 		target = kotlin.target,
@@ -115,8 +121,10 @@ abstract class KotlinJvmKindScope(commonConfig: CommonConfig, kotlin: KotlinSing
 	}
 }
 
-open class KotlinJvmScope(commonConfig: CommonConfig, final override val kotlin: KotlinJvmProjectExtension) :
-	KotlinJvmKindScope(commonConfig, kotlin)
+open class KotlinJvmScope(
+	commonConfig: CommonConfig,
+	final override val kotlin: KotlinJvmProjectExtension
+) : KotlinJvmKindScope<KotlinWithJavaTarget<*>>(commonConfig, kotlin)
 
 
 class KotlinTargetSourceSet(val main: KotlinSourceSet, val test: KotlinSourceSet?) {
@@ -184,4 +192,3 @@ class KotlinIntermediateItem(
 	override val targetSourceSet: KotlinTargetSourceSet get() = sourceSet
 	override val dependencySourceSet: KotlinTargetSourceSet get() = sourceSet
 }
-

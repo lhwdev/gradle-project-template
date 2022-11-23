@@ -2,11 +2,14 @@
 // If you need android in your project, rename this file to .kt and do following things:
 // - `compileOnly("com.android.tools.build:gradle:...")` from /includeBuild/build.gradle.kts.
 // - Uncomment `// is KotlinAndroidProjectExtension -> KotlinAndroidScope::class.java` from CommonConfig.kt.
+@file:Suppress("unused", "MemberVisibilityCanBePrivate")
+
 package com.lhwdev.build
 
 import com.android.build.gradle.BaseExtension
 import org.gradle.api.Project
 import org.gradle.api.plugins.ExtensionContainer
+import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinAndroidTarget
 
 
@@ -16,20 +19,20 @@ fun KotlinMultiplatformScope.android(
 ): KotlinAndroidItem {
 	val android = commonConfig.project.extensions.findByName("android") as? BaseExtension
 		?: error("android plugin was not configured")
-	
+
 	val target = kotlin.android(name)
 	val item = KotlinAndroidItem(
 		target = target,
 		sourceSet = KotlinTargetSourceSet(kotlin.sourceSets, name = "android")
 	)
-	
+
 	android.sourceSets.all {
 		val directory = "src/${sourceSetNameFor(name, this.name)}"
 		setRoot(directory)
 	}
-	
+
 	item.setupBlock()
-	
+
 	return item
 }
 
@@ -37,7 +40,7 @@ fun KotlinMultiplatformScope.android(
 // mpp only
 
 open class KotlinAndroidScope(commonConfig: CommonConfig, final override val kotlin: KotlinAndroidProjectExtension) :
-	KotlinJvmKindScope(commonConfig, kotlin)
+	KotlinJvmKindScope<KotlinAndroidTarget>(commonConfig, kotlin)
 
 class KotlinAndroidItem(
 	val target: KotlinAndroidTarget,
