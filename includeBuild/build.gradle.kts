@@ -19,6 +19,6 @@ gradlePlugin {
 }
 
 dependencies {
-	compileOnly("org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.31")
-	// compileOnly("com.android.tools.build:gradle:7.1.2")
+	compileOnly("org.jetbrains.kotlin:kotlin-gradle-plugin:${libs.versions.kotlin.get()}")
+	// compileOnly("com.android.tools.build:gradle:${libs.versions.androidGradle.get()}")
 }

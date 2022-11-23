@@ -4,6 +4,8 @@
 // https://docs.gradle.org/7.4/userguide/declaring_dependencies.html#sec:type-safe-project-accessors
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
+// All single-source-of-truth for **settings.gradle.kts** + build.gradle.kts + includeBuild
+val androidGradleVersion = "7.2.0"
 
 pluginManagement {
 	repositories {
@@ -11,12 +13,25 @@ pluginManagement {
 		google()
 	}
 	
-	resolutionStrategy.eachPlugin {
-		val id = requested.id.id
-		
-		// Android
-		if(id.startsWith("com.android")) {
-			useModule("com.android.tools.build:gradle:7.1.2") // synchronize with includeBuild/build.gradle.kts version
+}
+
+// Putting this in pluginManagement {} block makes referencing outer variable impossible
+pluginManagement.resolutionStrategy.eachPlugin {
+	val id = requested.id.id
+	
+	// Android
+	if(id.startsWith("com.android")) {
+		useModule("com.android.tools.build:gradle:$androidGradleVersion")
+	}
+}
+
+dependencyResolutionManagement {
+	versionCatalogs {
+		create("libs") {
+			// If you are to change this path, make sure to change includeBuild/settings.gradle.kts
+			from(files("libs.versions.toml"))
+			
+			version("androidGradle", androidGradleVersion)
 		}
 	}
 }
