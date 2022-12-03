@@ -5,17 +5,14 @@ package com.lhwdev.build
 import org.gradle.api.NamedDomainObjectContainer
 import org.gradle.kotlin.dsl.get
 import org.gradle.kotlin.dsl.invoke
-import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
-import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
-import org.jetbrains.kotlin.gradle.dsl.KotlinProjectExtension
-import org.jetbrains.kotlin.gradle.dsl.KotlinSingleTargetExtension
+import org.jetbrains.kotlin.gradle.dsl.*
 import org.jetbrains.kotlin.gradle.plugin.KotlinDependencyHandler
 import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 import org.jetbrains.kotlin.gradle.plugin.KotlinTarget
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinWithJavaTarget
 
 
-abstract class KotlinScope(internal val commonConfig: CommonConfig) {
+abstract class KotlinScope(internal val commonConfig: CommonConfig) : KotlinTopLevelExtensionConfig {
 	internal abstract val kotlin: KotlinProjectExtension
 	
 	internal open fun setup() {
@@ -37,6 +34,29 @@ abstract class KotlinScope(internal val commonConfig: CommonConfig) {
 				}
 			}
 		}
+	}
+	
+	
+	// from KotlinTopLevelExtensionConfig
+	
+	override var coreLibrariesVersion: String
+		get() = kotlin.coreLibrariesVersion
+		set(value) {
+			kotlin.coreLibrariesVersion = value
+		}
+	
+	override var explicitApi: ExplicitApiMode?
+		get() = kotlin.explicitApi
+		set(value) {
+			kotlin.explicitApi = value
+		}
+	
+	override fun explicitApi() {
+		kotlin.explicitApi()
+	}
+	
+	override fun explicitApiWarning() {
+		kotlin.explicitApiWarning()
 	}
 }
 
