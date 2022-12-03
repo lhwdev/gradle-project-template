@@ -4,11 +4,9 @@ plugins {
 	id("common-plugin") // must be applied after Kotlin/Android plugins
 }
 
-commonConfig {
-	kotlin {
-		dependencies {
-			
-		}
+commonConfig.kotlin {
+	dependencies {
+	
 	}
 }
 
