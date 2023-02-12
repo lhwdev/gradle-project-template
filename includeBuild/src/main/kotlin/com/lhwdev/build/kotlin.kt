@@ -60,8 +60,10 @@ abstract class KotlinScope(internal val commonConfig: CommonConfig) : KotlinTopL
 	}
 }
 
-open class KotlinMultiplatformScope(commonConfig: CommonConfig, override val kotlin: KotlinMultiplatformExtension) :
-	KotlinScope(commonConfig) {
+open class KotlinMultiplatformScope(
+	commonConfig: CommonConfig,
+	final override val kotlin: KotlinMultiplatformExtension
+) : KotlinScope(commonConfig) {
 	
 	val common: KotlinCommonItem = KotlinCommonItem(sourceSet = KotlinTargetSourceSet(kotlin.sourceSets, "common"))
 	
@@ -144,7 +146,7 @@ abstract class KotlinJvmKindScope<Target : KotlinTarget>(
 open class KotlinJvmScope(
 	commonConfig: CommonConfig,
 	final override val kotlin: KotlinJvmProjectExtension
-) : KotlinJvmKindScope<KotlinWithJavaTarget<*>>(commonConfig, kotlin)
+) : KotlinJvmKindScope<KotlinWithJavaTarget<*, *>>(commonConfig, kotlin)
 
 
 class KotlinTargetSourceSet(val main: KotlinSourceSet, val test: KotlinSourceSet?) {
@@ -201,8 +203,7 @@ abstract class KotlinPlatformItem(sourceSet: KotlinTargetSourceSet) : KotlinTarg
 class KotlinJvmItem(
 	val target: KotlinTarget,
 	sourceSet: KotlinTargetSourceSet
-) : KotlinPlatformItem(sourceSet = sourceSet) {
-}
+) : KotlinPlatformItem(sourceSet = sourceSet)
 
 
 class KotlinIntermediateItem(

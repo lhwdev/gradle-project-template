@@ -1,7 +1,7 @@
 # Versions for the whole project.
 
 [versions]
-kotlin = "1.7.20"
+kotlin = "1.8.10"
 coroutine = "1.6.4"
 serialization = "1.4.1"
 androidGradle = "?.?.?" # added from settings.gradle.kts
